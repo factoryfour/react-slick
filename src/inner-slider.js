@@ -122,7 +122,8 @@ export var InnerSlider = createReactClass({
     typeof slide === 'number' && this.changeSlide({
       message: 'index',
       index: slide,
-      currentSlide: this.state.currentSlide
+      currentSlide: this.state.currentSlide,
+	  slidesToScroll: this.props.slidesToScroll,
     });
   },
   render: function () {

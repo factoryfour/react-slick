@@ -33,9 +33,7 @@ var EventHandlers = {
         return;
       }
     } else if (options.message === 'index') {
-      // Old code: targetSlide = parseInt(options.index);
-	  consolde.log('HERE!')
-	  targetSlide = options.index * options.slidesToScroll;
+      targetSlide = parseInt(options.index);
       if (targetSlide === options.currentSlide) {
         return;
       }

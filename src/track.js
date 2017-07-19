@@ -90,12 +90,9 @@ var renderSlides = function (spec) {
     const onClick = function(e) {
 	// old child.props && child.props.onClick && child.props.onClick(e);
   	  if (child.props && child.props.onClick) {
-  		  console.log('Child on Click Called');
   		  child.props.onClick(e);
   	  }
-  	  //console.log(spec.focusOnSelect);
   	  if (spec.focusOnSelect) {
-  		  console.log('FocusOnSelect called')
   		  setTimeout(() => {
   			  spec.focusOnSelect(childOnClickOptions);
   		  }, 50);

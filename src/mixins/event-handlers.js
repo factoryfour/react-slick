@@ -38,7 +38,6 @@ var EventHandlers = {
         return;
       }
     }
-
     this.slideHandler(targetSlide);
   },
 
@@ -59,7 +58,7 @@ var EventHandlers = {
   },
   // Focus on selecting a slide (click handler on track)
   selectHandler: function (options) {
-    if (this.sate.swipeAttempt === true) {
+    if (this.state.swipeAttempt === true) {
       this.setState({
         dragging: false,
         edgeDragged: false,
@@ -84,7 +83,7 @@ var EventHandlers = {
     posY = (e.touches !== undefined) ? e.touches[0].pageY : e.clientY;
     this.setState({
       dragging: true,
-      swipeAttempt: true,
+      swipeAttempt: false,
       touchObject: {
         startX: posX,
         startY: posY,
@@ -158,7 +157,6 @@ var EventHandlers = {
       this.props.swipeEvent(swipeDirection);
       this.setState({
         swiped: true,
-        swipeAttempt: true,
       });
     }
 

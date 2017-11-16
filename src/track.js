@@ -3,6 +3,7 @@
 import React from 'react';
 import assign from 'object-assign';
 import classnames from 'classnames';
+import raf from 'raf';
 
 var getSlideClasses = (spec) => {
   var slickActive, slickCenter, slickCloned;
@@ -80,9 +81,11 @@ var renderSlides = function (spec) {
     const slideClass = child.props.className || ''
 
     const onClick = function(e) {
-      child.props && child.props.onClick && child.props.onClick(e)
+      child.props && child.props.onClick && child.props.onClick(e);
       if (spec.focusOnSelect) {
-        spec.focusOnSelect(childOnClickOptions)
+        raf(() => {
+          spec.focusOnSelect(childOnClickOptions);
+        });
       }
     }
 

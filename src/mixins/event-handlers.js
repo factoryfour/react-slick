@@ -38,7 +38,6 @@ var EventHandlers = {
         return;
       }
     }
-
     this.slideHandler(targetSlide);
   },
 
@@ -59,6 +58,17 @@ var EventHandlers = {
   },
   // Focus on selecting a slide (click handler on track)
   selectHandler: function (options) {
+    if (this.state.swipeAttempt === true) {
+      this.setState({
+        dragging: false,
+        edgeDragged: false,
+        swiped: false,
+        swipeAttempt: false,
+        swipeLeft: null,
+        touchObject: {},
+      });
+      return;
+    }
     this.changeSlide(options)
   },
   swipeStart: function (e) {
@@ -73,6 +83,7 @@ var EventHandlers = {
     posY = (e.touches !== undefined) ? e.touches[0].pageY : e.clientY;
     this.setState({
       dragging: true,
+      swipeAttempt: false,
       touchObject: {
         startX: posX,
         startY: posY,
@@ -144,7 +155,9 @@ var EventHandlers = {
 
     if (this.state.swiped === false && this.props.swipeEvent) {
       this.props.swipeEvent(swipeDirection);
-      this.setState({ swiped: true });
+      this.setState({
+        swiped: true,
+      });
     }
 
     if (!this.props.vertical) {
@@ -158,6 +171,7 @@ var EventHandlers = {
     }
 
     this.setState({
+      swipeAttempt: true,
       touchObject: touchObject,
       swipeLeft: swipeLeft,
       trackStyle: getTrackCSS(assign({left: swipeLeft}, this.props, this.state))
